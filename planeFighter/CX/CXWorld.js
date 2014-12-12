@@ -1,6 +1,6 @@
 //	游戏世界类
 //	by chenxuan20141206
-var CXWorld=function (main){
+var CXWorld=function (stageSettings,otherData){
 	this.runWorld=function (){
 		//	世界循环刷新
 		var len=this.worldElements.length;
@@ -42,10 +42,11 @@ var CXWorld=function (main){
 		//	获取按键状态
 		return this.keyboard.getKey(keyCode);
 	}
-	this.init=function (main){
+	this.init=function (stageSettings,otherData){
 		//	初始化
 		this.keyboard=new CXKeyboard();
-		this.mainController=main;
+		this.stages=stageSettings;
+		this.otherData=otherData;
 	}
 	this.add=function (obj){
 		//	添加游戏单位到游戏世界中
@@ -57,10 +58,11 @@ var CXWorld=function (main){
 	}
 
 	this.canRun=false;
-	this.frameTime=1000/24;
+	this.frameTime=1000/60;
 	this.worldElements=[];
 	this.nextFrameElements=[];
 	this.keyboard=null;
-	this.mainController=null;
-	this.init(main);
+	this.stages=null;
+	this.otherData=null;
+	this.init(stageSettings,otherData);
 }

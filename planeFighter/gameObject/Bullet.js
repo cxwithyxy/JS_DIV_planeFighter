@@ -1,8 +1,8 @@
 //	子弹类
 //	by chenxuan20141207
-var Bullet=function (){
+var Bullet=function (world){
 	//	继承CXObject并绑定dom对象
-	CXObject.call(this,document.createElement("img"));
+	CXObject.call(this,world,document.createElement("img"));
 	this.init=function (){
 		this.dom.src="src/bullet.png";
 
@@ -13,7 +13,7 @@ var Bullet=function (){
 		//	让子弹飞
 		this.y+=this.speed;
 		this.setPosition();
-		if(this.y<-this.height||this.y>theWorld.mainController.stageHeight+this.heigh){
+		if(this.y<-this.height||this.y>theWorld.stages.height+this.heigh){
 			this.alive=false;
 			this.removeDomFromStage();
 		}
@@ -30,7 +30,7 @@ var Bullet=function (){
 				allElement[i].alive=false;
 				this.removeDomFromStage();
 				allElement[i].removeDomFromStage();
-				theWorld.mainController.mark+=allElement[i].mark;
+				theWorld.otherData.main.mark+=allElement[i].mark;
 			}
 		}
 	}

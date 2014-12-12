@@ -1,8 +1,9 @@
 //	游戏单位类
 //	by chenxuan20141206
-var CXObject=function (dom){
-	this.init=function (dom){
+var CXObject=function (world,dom){
+	this.init=function (world,dom){
 		this.dom=dom;
+		this.world=world;
 		this.setDomAbs();
 	}
 	this.setDomAbs=function (){
@@ -65,6 +66,10 @@ var CXObject=function (dom){
 	this.addDomToStage=function (_stage){
 		_stage.appendChild(this.dom);
 	}
+	this.addIn=function (){
+		this.world.add(this);
+		this.addDomToStage(this.world.stages.stage);
+	}
 	this.removeDomFromStage=function (){
 		try{
 			this.dom.parentNode.removeChild(this.dom);
@@ -76,5 +81,6 @@ var CXObject=function (dom){
 	this.alive=true;
 	this.dom=null;
 	this.AABBs=[];
-	this.init(dom);
+	this.world=null;
+	this.init(world,dom);
 }

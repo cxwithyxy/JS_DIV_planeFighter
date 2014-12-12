@@ -1,8 +1,8 @@
 //	玩家飞机
 //	by chenxuan 20141207
-var PlayerPlane=function (x,y){
+var PlayerPlane=function (world,x,y){
 	//	继承CXObject并绑定dom对象
-	CXObject.call(this,document.getElementById('PlayerPlane'));
+	CXObject.call(this,world,document.getElementById('PlayerPlane'));
 
 	this.init=function (x,y){
 		this.setPosition(x,y);
@@ -55,13 +55,13 @@ var PlayerPlane=function (x,y){
 				this.canShut=false
 
 				//	生成子弹
-				var oneBullet=new Bullet();
-				oneBullet.speed=-23;
-				//	别忘了把子弹添加到舞台上面去
-				oneBullet.addDomToStage(theWorld.mainController.stage);
+				var oneBullet=new Bullet(theWorld);
+				//	设置子弹速度
+				oneBullet.speed=-9.2;
+				
 				oneBullet.setPosition(this.x+43,this.y-20);
-				//	当然也别忘了把子弹加到游戏世界里面去
-				theWorld.add(oneBullet);
+				
+				oneBullet.addIn();
 
 				//	用定时器控制子弹发射的频率
 				var timeCounter=new CXTime(theWorld);
@@ -93,8 +93,8 @@ var PlayerPlane=function (x,y){
 
 	this.width=100;
 	this.height=100;
-	this.speedY=5;	//	纵向飞行速度
-	this.speedX=12;	//	横向飞行速度
+	this.speedY=2;	//	纵向飞行速度
+	this.speedX=4.8;	//	横向飞行速度
 	this.canShut=true;	//	控制子弹的发射
 	this.init(x,y);
 }

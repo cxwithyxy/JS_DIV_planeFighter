@@ -8,12 +8,17 @@ var main=function (){
 	}
 	this.initWorld=function (){
 		//	初始化游戏世界
-		this.world=new CXWorld();
-		this.world.mainController=this;
+		this.world=new CXWorld({
+			stage:this.stage,
+			width:this.stageWidth,
+			height:this.stageHeight
+		},{
+			main:this
+		});
 	}
 	this.initGame=function (){
 		//	初始化游戏设置
-		this.player=new PlayerPlane(0,0);
+		this.player=new PlayerPlane(this.world,0,0);
 		this.player.setPosition(
 			(this.stageWidth-this.player.width)/2,
 			this.stageHeight-this.player.height
@@ -28,14 +33,15 @@ var main=function (){
 			this.enemyC[1]=false;
 
 			//	创建敌机1
-			var oneEnemy=new Enemy_1();
-			oneEnemy.setPosition(Math.random()*(theWorld.mainController.stageWidth-oneEnemy.width));
-			oneEnemy.addDomToStage(theWorld.mainController.stage);
+			var oneEnemy=new Enemy_1(this.world);
+			oneEnemy.setPosition(Math.random()*(theWorld.stages.width-oneEnemy.width));
+		
 			//	设置敌机速度
-			oneEnemy.speed=Math.round(Math.random()*10+5);
+			oneEnemy.speed=Math.round(Math.random()*4+2);
 			//	设置得分
-			oneEnemy.mark=Math.round(160/oneEnemy.speed);
-			theWorld.add(oneEnemy);
+			oneEnemy.mark=Math.round(64/oneEnemy.speed);
+			
+			oneEnemy.addIn();
 
 			var timer=new CXTime(theWorld);
 			timer.setCount(600,(function (){

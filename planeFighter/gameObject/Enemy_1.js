@@ -1,8 +1,8 @@
 //	敌机1
 //	by chenxuan20141207
-var Enemy_1=function (){
+var Enemy_1=function (world){
 	//	继承CXObject并绑定dom对象
-	CXObject.call(this,document.createElement("img"));
+	CXObject.call(this,world,document.createElement("img"));
 	this.init=function (){
 		this.dom.src="src/enemy_1.png";
 		this.initAABB();
@@ -19,7 +19,7 @@ var Enemy_1=function (){
 		//	让敌机飞
 		this.y+=this.speed;
 		this.setPosition();
-		if(this.y>theWorld.mainController.stageHeight+this.height){
+		if(this.y>theWorld.stages.height+this.height){
 			this.alive=false;
 			this.removeDomFromStage();
 		}
@@ -30,7 +30,7 @@ var Enemy_1=function (){
 
 	this.height=100;
 	this.width=100;
-	this.speed=5;
+	this.speed=2;
 	this.mark=2;
 	this.init();
 }

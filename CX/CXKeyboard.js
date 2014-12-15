@@ -1,16 +1,23 @@
-//	按键类
+//	按键类 v1.1
 //	by chenxuan20141207
+
+/*
+====1.0====
+1. 能够检测按键
+====1.1====
+1. 能够兼容火狐
+*/
 var CXKeyboard=function (){
 	this.listen=function (){
 		//	开始监听键盘按键
 		var _this=this;
 		document.onkeydown=function (e){
-			e=window.event||event||e;
+			e=e||window.event||event;
 			_this.keyList[e.keyCode]=true;
 			// trace(e.keyCode);
 		}
 		document.onkeyup=function (e){
-			e=window.event||event||e;
+			e=e||window.event||event;
 			_this.keyList[e.keyCode]=false;
 		}
 	}

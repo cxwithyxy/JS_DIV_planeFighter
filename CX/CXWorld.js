@@ -1,4 +1,4 @@
-//	游戏世界类
+//	游戏世界类 v1.0
 //	by chenxuan20141206
 var CXWorld=function (stageSettings,otherData){
 	this.runWorld=function (){

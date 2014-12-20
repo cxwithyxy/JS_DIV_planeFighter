@@ -65,7 +65,7 @@ var PlayerPlane=function (world,x,y){
 
 				//	用定时器控制子弹发射的频率
 				var timeCounter=new CXTime(theWorld);
-				timeCounter.setCount(300,(function (){
+				timeCounter.setCount(350,(function (){
 					this.canShut=true;
 				}).bind(this));
 				timeCounter.start();

@@ -27,8 +27,9 @@ var main=function (){
 	}
 	this.initEnemyPlaneAdder=function (){
 		this.enemyC[1]=true;
+		this.enemyC[2]=true;
 	}
-	this.addEnemy_1=function (theWorld){
+	this.addEnemy=function (theWorld){
 		if(this.enemyC[1]){
 			this.enemyC[1]=false;
 
@@ -49,9 +50,29 @@ var main=function (){
 			}).bind(this));
 			timer.start();
 		}
+		if(this.enemyC[2]){
+			this.enemyC[2]=false;
+
+			//	创建敌机1
+			var oneEnemy=new Enemy_2(this.world);
+			oneEnemy.setPosition(Math.random()*(theWorld.stages.width-oneEnemy.width));
+		
+			//	设置敌机速度
+			oneEnemy.speed=Math.round(Math.random()*2+1.5);
+			//	设置得分
+			oneEnemy.mark=Math.round(86/oneEnemy.speed);
+			
+			oneEnemy.addIn();
+
+			var timer2=new CXTime(theWorld);
+			timer2.setCount(1500,(function (){
+				this.enemyC[2]=true;
+			}).bind(this));
+			timer2.start();
+		}
 	}
 	this.worldFrameDo=function (theWorld){
-		this.addEnemy_1(theWorld);
+		this.addEnemy(theWorld);
 
 		//	判断主角飞机是否死亡
 		if(!this.player.alive){
@@ -66,6 +87,9 @@ var main=function (){
 		this.world.start();
 		
 		trace("game is started");
+
+		// tt=new CXObject(this.world,["src/enemy_1.png","src/plane.png","src/bullet.png"],{w:200,h:200});
+		// tt.addIn();
 	}
 	this.gameStop=function (){
 		this.alive=false;

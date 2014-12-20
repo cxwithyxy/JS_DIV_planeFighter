@@ -1,5 +1,11 @@
-//	子弹类
-//	by chenxuan20141207
+//	子弹类 v1.1
+//	by chenxuan20141220
+
+/*
+====1.1===
+1. 子弹由一击即毁改成扣除敌机生命值
+*/
+
 var Bullet=function (world){
 	//	继承CXObject并绑定dom对象
 	CXObject.call(this,world,document.createElement("img"));
@@ -25,12 +31,17 @@ var Bullet=function (world){
 		var allElement=theWorld.worldElements;
 		var len=allElement.length;
 		for(var i=0;i<len;i++){
-			if(this!=allElement[i]&&this.isHit(allElement[i])){
+			if(
+				this!=allElement[i]&&
+				allElement[i].canHitByBullet&&
+				this.isHit(allElement[i])
+			){
 				this.alive=false;
-				allElement[i].alive=false;
 				this.removeDomFromStage();
-				allElement[i].removeDomFromStage();
-				theWorld.otherData.main.mark+=allElement[i].mark;
+				allElement[i].HP-=this.damage;
+				// allElement[i].alive=false;
+				// allElement[i].removeDomFromStage();
+				// theWorld.otherData.main.mark+=allElement[i].mark;
 			}
 		}
 	}
@@ -38,5 +49,6 @@ var Bullet=function (world){
 	this.height=14;
 	this.width=5;
 	this.speed=0;
+	this.damage=5;
 	this.init();
 }

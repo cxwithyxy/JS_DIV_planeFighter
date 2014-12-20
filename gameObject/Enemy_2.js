@@ -1,38 +1,29 @@
-//	敌机1 v1.1
+//	敌机2 v1.0
 //	by chenxuan20141220
 
-/*
-====1.1====
-1. 增加生命值
-2. 增加爆炸动画
-*/
-
-var Enemy_1=function (world){
+var Enemy_2=function (world){
 	//	继承Enemy
 	Enemy.call(
 		this,
 		world,
 		[
-			"src/enemy_1.png",
+			"src/enemy_2.png",
 			"src/explode_1.png",
 			"src/explode_2.png",
 			"src/explode_3.png",
 		],
 		{
-			w:100,
-			h:100
+			w:150,
+			h:150
 		}
 	);
 	this.init=function (){
 		this.initAABB();
 	}
 	this.initAABB=function(){
-		this.addAABB(16,26,12,10);
-		this.addAABB(70,26,10,11);
-		this.addAABB(5,34,86,17);
-		this.addAABB(39,12,20,58);
-		this.addAABB(47,82,9,12);
-		this.addAABB(41,70,19,13);
+		this.addAABB(64,14,27,130);
+		this.addAABB(23,98,102,18);
+		this.addAABB(3,74,142,15);
 	}
 	this.fly=function(theWorld){
 		//	让敌机飞
@@ -57,7 +48,7 @@ var Enemy_1=function (world){
 		}
 	}
 
-	this.HP=5;
+	this.HP=15;
 	this.distoryMovie={
 		//	设置爆炸动画开始结束帧段
 		start:1,
